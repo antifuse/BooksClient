@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bclient.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CSharp_MARC, Version=0.0.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MARC.1.0.0\lib\CSharp_MARC.dll</HintPath>
@@ -205,6 +208,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bclient.ico" />
     <Content Include="yaz.dll" />
   </ItemGroup>
   <ItemGroup>

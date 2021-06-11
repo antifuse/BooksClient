@@ -77,8 +77,8 @@ namespace BooksClient
             Properties.Settings.Default.apiUrl = Regex.Replace(txtRestUrl.Text, @"\/+$", "");
             Properties.Settings.Default.Save();
             var response = await Client.PostAsJsonAsync<IEnumerable<Book>>(Properties.Settings.Default.apiUrl + "/books/bulk", allEntries.Items.OfType<Book>());
-            Console.WriteLine(await response.RequestMessage.Content.ReadAsStringAsync());
-            Console.WriteLine(await response.Content.ReadAsStringAsync());
+            
+            allEntries.ItemsSource = DataAll = new ObservableCollection<Book>();
             //Client.PostAsync(Properties.Settings.Default.apiUrl + "/books/bulk", new StringContent(JsonConvert.SerializeObject(allEntries.Items.Cast<Book>()), Encoding.UTF8, "application/json"));
 
         }
