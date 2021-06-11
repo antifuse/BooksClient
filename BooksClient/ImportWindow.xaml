@@ -1,0 +1,50 @@
+﻿<Window x:Name="BooksClient" x:Class="BooksClient.ImportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Import Bibliographical Data" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="286*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="243*" />
+            <ColumnDefinition Width="430*" />
+            <ColumnDefinition Width="119*" />
+        </Grid.ColumnDefinitions>
+        <Menu x:Name="File" Grid.Row="0" Grid.ColumnSpan="3" >
+            <MenuItem Header="_File">
+                <MenuItem x:Name="EditCredentials" Header="API credentials..." Click="EditCredentials_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid x:Name="allEntries" Grid.Column="1" AutoGenerateColumns="True" IsManipulationEnabled="True" ItemsSource="{Binding DataAll, ElementName=BooksClient}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" />
+        <TextBox x:Name="txtRestUrl" Grid.Column="2" ToolTip="Base URL" Grid.Row="1" VerticalAlignment="Top" Margin="5,5,5,5" Height="23"/>
+        <Button x:Name="uploadButton" Content="Hochladen" Grid.Column="2" Margin="5,5,5,5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Click="Upload_Click" Height="20" Grid.Row="1"/>
+
+        <DataGrid x:Name="currentTable" 
+                  CanUserAddRows="True"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding CurrentData, ElementName=BooksClient}" Margin="0,28,0,25" IsManipulationEnabled="True" Grid.Row="1" Grid.Column="0" ScrollViewer.CanContentScroll="True" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Key" Binding="{Binding Key}" />
+                <DataGridTextColumn Header="Value" Binding="{Binding Value}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="acceptRetrieved" Content="Übernehmen" Margin="5,0" HorizontalAlignment="Stretch" Click="AcceptRetrieved_Click" Grid.Row="1" Grid.Column="0" Height="20" VerticalAlignment="Bottom"/>
+        <ComboBox SelectedIndex="0" HorizontalAlignment="Stretch" Margin="5,1,5,0" VerticalAlignment="Top" SelectedItem ="{Binding ApiSelection, ElementName=BooksClient}" Grid.Row="1" Grid.Column="0" Height="22">
+            <ComboBoxItem Content="DNB"/>
+            <ComboBoxItem Content="BL"/>
+            <!--- <ComboBoxItem Content="GoogleBooks"/> -->
+        </ComboBox>
+
+        <TextBox x:Name="isbnInput" HorizontalAlignment="Stretch" Height="23" Margin="10,26,10,0" Grid.Row="2" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="Isbn_TextChanged" ToolTip="ISBN"  />
+        <CheckBox Content="Automatische Eingabe" Margin="10,55,68,20" Grid.Row="2" VerticalAlignment="Top" Height="15" IsChecked="{Binding AutomaticInput, ElementName=BooksClient}"/>
+        <Button x:Name="searchButton" IsDefault="True" HorizontalAlignment="Stretch" Content="Suche" Margin="10,26,10,0" Grid.Row="2" VerticalAlignment="Top" Height="23" Click="SearchButton_Click"  Grid.Column="2"/>
+    </Grid>
+</Window>
